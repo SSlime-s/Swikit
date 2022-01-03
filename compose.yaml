@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  server:
+    container_name: Swikit-server
+    build:
+      context: .
+    ports:
+      - "8088:8088"
+    depends_on:
+      - db
+    volumes:
+      - ./:/app
+      - cargo-cache:/usr/local/cargo/registry
+      - target-cache:/app/target
+    command: /bin/sh -c "cargo watch -x run"
+
+  db:
+    container_name: Swikit-db
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: Swikit
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    volumes:
+      - ./mysql/data:/var/lib/mysql:z
+      - ./mysql/init:/docker-entrypoint-initdb.d:z
+
+volumes:
+  cargo-cache:
+  target-cache:
