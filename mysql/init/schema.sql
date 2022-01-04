@@ -4,10 +4,10 @@ USE Swikit;
 
 CREATE TABLE IF NOT EXISTS `pages` (
   `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT
-  , `title` varchar(512) NOT NULL
+  , `title` varchar(512) NOT NULL UNIQUE
   , `source` text NOT NULL
-  , `create_time` timestamp NOT NULL
-  , `update_time` timestamp NOT NULL
+  , `create_time` datetime NOT NULL
+  , `update_time` datetime NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `page_revisions` (
@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS `page_revisions` (
   , `page_id` int NOT NULL
   , `source` text NOT NULL
   , `author` varchar(256) NOT NULL
-  , `create_time` timestamp NOT NULL
+  , `create_time` datetime NOT NULL
 ) ENGINE=InnoDB;
