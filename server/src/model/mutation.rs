@@ -57,7 +57,7 @@ impl MutationRoot {
         sqlx::query(sql)
             .bind(last_insert_row.id)
             .bind(&last_insert_row.source)
-            .bind("example@example.com") // FIX ME
+            .bind("example@example.com") // FIXME
             .bind(&last_insert_row.update_time)
             .execute(&mut tx)
             .await?;
