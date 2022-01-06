@@ -12,8 +12,9 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     }
   }
 }
+type Props = Awaited<ReturnType<typeof getServerSideProps>>["props"]
 
-const Page: NextPage<Awaited<ReturnType<typeof getServerSideProps>>["props"]> = ({ title }) => {
+const Page: NextPage<Props> = ({ title }) => {
   const { data } = useGetPageByTitleQuery({ variables: { title }})
 
   return (
