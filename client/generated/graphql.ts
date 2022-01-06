@@ -1,11 +1,11 @@
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+import { GraphQLClient } from 'graphql-request';
+import * as Dom from 'graphql-request/dist/types.dom';
+import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -88,31 +88,6 @@ export const CreatePageDocument = gql`
   }
 }
     `;
-export type CreatePageMutationFn = Apollo.MutationFunction<CreatePageMutation, CreatePageMutationVariables>;
-
-/**
- * __useCreatePageMutation__
- *
- * To run a mutation, you first call `useCreatePageMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreatePageMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createPageMutation, { data, loading, error }] = useCreatePageMutation({
- *   variables: {
- *   },
- * });
- */
-export function useCreatePageMutation(baseOptions?: Apollo.MutationHookOptions<CreatePageMutation, CreatePageMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreatePageMutation, CreatePageMutationVariables>(CreatePageDocument, options);
-      }
-export type CreatePageMutationHookResult = ReturnType<typeof useCreatePageMutation>;
-export type CreatePageMutationResult = Apollo.MutationResult<CreatePageMutation>;
-export type CreatePageMutationOptions = Apollo.BaseMutationOptions<CreatePageMutation, CreatePageMutationVariables>;
 export const GetPageByTitleDocument = gql`
     query getPageByTitle($title: String!) {
   pageByTitle(title: $title) {
@@ -123,30 +98,19 @@ export const GetPageByTitleDocument = gql`
 }
     `;
 
-/**
- * __useGetPageByTitleQuery__
- *
- * To run a query within a React component, call `useGetPageByTitleQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPageByTitleQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetPageByTitleQuery({
- *   variables: {
- *      title: // value for 'title'
- *   },
- * });
- */
-export function useGetPageByTitleQuery(baseOptions: Apollo.QueryHookOptions<GetPageByTitleQuery, GetPageByTitleQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetPageByTitleQuery, GetPageByTitleQueryVariables>(GetPageByTitleDocument, options);
-      }
-export function useGetPageByTitleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPageByTitleQuery, GetPageByTitleQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetPageByTitleQuery, GetPageByTitleQueryVariables>(GetPageByTitleDocument, options);
-        }
-export type GetPageByTitleQueryHookResult = ReturnType<typeof useGetPageByTitleQuery>;
-export type GetPageByTitleLazyQueryHookResult = ReturnType<typeof useGetPageByTitleLazyQuery>;
-export type GetPageByTitleQueryResult = Apollo.QueryResult<GetPageByTitleQuery, GetPageByTitleQueryVariables>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
+
+
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
+
+export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
+  return {
+    createPage(variables?: CreatePageMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreatePageMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreatePageMutation>(CreatePageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createPage');
+    },
+    getPageByTitle(variables: GetPageByTitleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetPageByTitleQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPageByTitleQuery>(GetPageByTitleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPageByTitle');
+    }
+  };
+}
+export type Sdk = ReturnType<typeof getSdk>;

@@ -1,21 +1,23 @@
 import type { GetServerSidePropsContext, NextPage } from 'next'
 import Head from 'next/head'
 import { Button, Card } from 'antd'
-import { useGetPageByTitleQuery } from '../../generated/graphql'
+import { sdk } from '../../src/client';
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const { title } = context.params!;
   const joinedTitle = (title as string[]).join("/")
+  const data = await sdk.getPageByTitle({ title: joinedTitle })
+  const page = data.pageByTitle
+
   return {
     props: {
-      title: joinedTitle
+      page
     }
   }
 }
 type Props = Awaited<ReturnType<typeof getServerSideProps>>["props"]
 
-const Page: NextPage<Props> = ({ title }) => {
-  const { data } = useGetPageByTitleQuery({ variables: { title }})
+const Page: NextPage<Props> = ({ page }) => {
 
   return (
     <div>
@@ -26,8 +28,8 @@ const Page: NextPage<Props> = ({ title }) => {
       </Head>
 
       <main>
-        <Card title={data?.pageByTitle?.title ?? "undefined"}>
-          <div dangerouslySetInnerHTML={{ __html: data?.pageByTitle?.bodyHtml ?? ""}} />
+        <Card title={page?.title ?? "undefined"}>
+          <div dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? ""}} />
         </Card>
         <Button type="primary">Button</Button>
       </main>
