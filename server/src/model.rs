@@ -5,12 +5,12 @@ use pulldown_cmark::{html, Options, Parser};
 
 use crate::db::PageRecord;
 
-use self::{mutation::MutationRoot, query::QueryRoot};
+use self::{mutation::Mutation, query::QueryRoot};
 
 pub mod mutation;
 pub mod query;
 
-pub type SwikitSchema = Schema<QueryRoot, MutationRoot, EmptySubscription>;
+pub type SwikitSchema = Schema<QueryRoot, Mutation, EmptySubscription>;
 
 #[derive(Debug)]
 pub struct Page {

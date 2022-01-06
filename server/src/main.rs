@@ -9,7 +9,7 @@ use agql::{
 };
 use async_graphql as agql;
 use async_graphql_rocket::{GraphQLQuery, GraphQLRequest, GraphQLResponse};
-use model::mutation::MutationRoot;
+use model::mutation::Mutation;
 use rocket::{figment::Figment, response::content, Config, State};
 use sqlx::{mysql::MySqlPoolOptions};
 
@@ -38,7 +38,7 @@ async fn rocket() -> _ {
         .connect(r#"mysql://root:password@Swikit-db:3306/Swikit"#)
         .await
         .unwrap();
-    let schema = Schema::build(QueryRoot, MutationRoot, EmptySubscription)
+    let schema = Schema::build(QueryRoot, Mutation, EmptySubscription)
         .data(pool)
         .finish();
     let figment = Figment::from(rocket::Config::default())

@@ -18,10 +18,10 @@ pub struct UpdatePageInput {
     source: Option<String>,
 }
 
-pub struct MutationRoot;
+pub struct Mutation;
 
 #[Object]
-impl MutationRoot {
+impl Mutation {
     async fn create_page(
         &self,
         ctx: &agql::Context<'_>,
