@@ -26,7 +26,7 @@ type PageRevision {
 
 type MutationRoot {
   createPage(input: CreatePageInput!): Page!
-  updatePage(input: updatePageInput!): Page!
+  updatePage(input: updatePageInput!): Page
 }
 
 input CreatePageInput {
