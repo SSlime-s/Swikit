@@ -1,0 +1,7 @@
+query getPageByTitle($title: String!) {
+  pageByTitle(title: $title) {
+    id
+    title
+    bodyHtml
+  }
+}

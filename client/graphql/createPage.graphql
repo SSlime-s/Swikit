@@ -1,0 +1,5 @@
+mutation createPage {
+  createPage(input: {title: "The Test Page", source: "# The Test Page\nblank page"}) {
+    id
+  }
+}
