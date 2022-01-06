@@ -5,16 +5,16 @@ use std::net::Ipv4Addr;
 
 use agql::{
     http::{playground_source, GraphQLPlaygroundConfig},
-    EmptySubscription, Schema
+    EmptySubscription, Schema,
 };
 use async_graphql as agql;
 use async_graphql_rocket::{GraphQLQuery, GraphQLRequest, GraphQLResponse};
 use model::mutation::Mutation;
-use rocket::{figment::Figment, response::content, Config, State};
-use sqlx::{mysql::MySqlPoolOptions};
+use rocket::{figment::Figment, http::Method, response::content, Config, State};
+use rocket_cors::{AllowedOrigins, CorsOptions};
+use sqlx::mysql::MySqlPoolOptions;
 
-use crate::model::{SwikitSchema, query::QueryRoot};
-
+use crate::model::{query::QueryRoot, SwikitSchema};
 
 #[rocket::get("/")]
 fn graphql_playground() -> content::Html<String> {
@@ -45,8 +45,27 @@ async fn rocket() -> _ {
         .merge((Config::PORT, 8088))
         .merge((Config::ADDRESS, Ipv4Addr::new(0, 0, 0, 0)));
 
-    rocket::custom(figment).manage(schema).mount(
-        "/",
-        rocket::routes![graphql_playground, graphql_query, graphql_request],
-    )
+    let cors = cors_options().to_cors().unwrap();
+
+    rocket::custom(figment)
+        .manage(schema)
+        .mount(
+            "/",
+            rocket::routes![graphql_playground, graphql_query, graphql_request],
+        )
+        .attach(cors)
+}
+
+fn cors_options() -> CorsOptions {
+    let allowed_origins = AllowedOrigins::some_exact(&["http://localhost:3000"]);
+
+    CorsOptions {
+        allowed_origins,
+        allowed_methods: vec![Method::Get, Method::Post]
+            .into_iter()
+            .map(From::from)
+            .collect(),
+        allow_credentials: true,
+        ..Default::default()
+    }
 }
