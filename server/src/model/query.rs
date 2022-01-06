@@ -24,7 +24,11 @@ impl QueryRoot {
         Ok(page)
     }
 
-    async fn page_by_title(&self, ctx: &agql::Context<'_>, title: String) -> Result<Option<Page>, agql::Error> {
+    async fn page_by_title(
+        &self,
+        ctx: &agql::Context<'_>,
+        title: String,
+    ) -> Result<Option<Page>, agql::Error> {
         let pool = ctx.data::<MySqlPool>()?;
         let page_record: Option<PageRecord> = sqlx::query_as("SELECT * FROM pages WHERE title = ?")
             .bind(title)

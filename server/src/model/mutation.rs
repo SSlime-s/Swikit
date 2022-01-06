@@ -4,7 +4,6 @@ use sqlx::MySqlPool;
 
 use crate::{db::PageRecord, model::Page};
 
-
 #[derive(InputObject)]
 pub struct CreatePageInput {
     title: String,

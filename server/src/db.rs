@@ -1,7 +1,6 @@
 use chrono::NaiveDateTime;
 use sqlx::FromRow;
 
-
 #[derive(Debug, FromRow)]
 pub struct PageRecord {
     pub id: i32,
