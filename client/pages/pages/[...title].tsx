@@ -3,9 +3,9 @@ import Head from 'next/head'
 import { Button, Card } from 'antd'
 import { sdk } from '../../src/client';
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps = async (context: GetServerSidePropsContext<{title: string[]}>) => {
   const { title } = context.params!;
-  const joinedTitle = (title as string[]).join("/")
+  const joinedTitle = title.join("/")
   const data = await sdk.getPageByTitle({ title: joinedTitle })
   const page = data.pageByTitle
 
