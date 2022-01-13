@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { Button, Card } from 'antd'
 import { sdk } from '../src/client'
+import Link from 'next/link'
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const data = await sdk.getPageByTitle({ title: 'Home' })
@@ -24,25 +25,13 @@ const Home: NextPage<Props> = ({ page }) => {
         <title>Swikit</title>
       </Head>
 
-      <main>
-        <Card title={page?.title ?? "undefined"}>
-          <div dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? ""}} />
-        </Card>
-        <Button type="primary">Button</Button>
-      </main>
+      <Card title={page?.title ?? "undefined"}>
+        <div dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? ""}} />
+      </Card>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <Link href="/pages/The Test Page" passHref>
+        <Button type="link">tmp link</Button>
+      </Link>
     </div>
   )
 }

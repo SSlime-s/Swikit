@@ -25,12 +25,10 @@ const Page: NextPage<Props> = ({ page }) => {
         <title>Swikit - {page?.title}</title>
       </Head>
 
-      <main>
-        <Card title={page?.title ?? "undefined"}>
-          <div dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? ""}} />
-        </Card>
-        <Button type="primary">Button</Button>
-      </main>
+      <Card title={page?.title ?? "undefined"}>
+        <div dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? ""}} />
+      </Card>
+      <Button type="primary">Button</Button>
     </div>
   )
 }
