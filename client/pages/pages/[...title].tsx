@@ -26,7 +26,7 @@ const Page: NextPage<Props> = ({ page }) => {
       </Head>
 
       <Card title={page?.title ?? "undefined"}>
-        <div dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? ""}} />
+        <article className='markdown-body' dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? ""}} />
       </Card>
       <Button type="primary">Button</Button>
     </div>

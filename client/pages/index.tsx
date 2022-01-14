@@ -26,7 +26,7 @@ const Home: NextPage<Props> = ({ page }) => {
       </Head>
 
       <Card title={page?.title ?? "undefined"}>
-        <div dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? ""}} />
+        <article className='markdown-body' dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? ""}} />
       </Card>
 
       <Link href="/pages/The Test Page" passHref>
