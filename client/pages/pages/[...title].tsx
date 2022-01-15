@@ -1,6 +1,6 @@
 import type { GetServerSidePropsContext, NextPage } from 'next'
 import Head from 'next/head'
-import { Button, Card } from 'antd'
+import { Button, Card, Empty } from 'antd'
 import { sdk } from '../../src/client';
 
 export const getServerSideProps = async (context: GetServerSidePropsContext<{title: string[]}>) => {
@@ -25,9 +25,15 @@ const Page: NextPage<Props> = ({ page }) => {
         <title>Swikit - {page?.title}</title>
       </Head>
 
-      <Card title={page?.title ?? "undefined"}>
-        <article className='markdown-body' dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? ""}} />
-      </Card>
+      {
+        page === null || page === undefined ?
+          <Card>
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          </Card> :
+          <Card title={page.title ?? "undefined"}>
+            <article className='markdown-body' dangerouslySetInnerHTML={{ __html: page.bodyHtml ?? ""}} />
+          </Card>
+      }
       <Button type="primary">Button</Button>
     </div>
   )
