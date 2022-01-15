@@ -1,7 +1,8 @@
+import { Button, Card, Empty } from 'antd'
 import type { GetServerSidePropsContext, NextPage } from 'next'
 import Head from 'next/head'
-import { Button, Card, Empty } from 'antd'
-import { sdk } from '../../src/client'
+
+import { sdk } from '@/src/client'
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<{ title: string[] }>

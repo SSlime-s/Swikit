@@ -1,10 +1,11 @@
+import { Button, Card } from 'antd'
 import type { GetServerSidePropsContext, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import { Button, Card } from 'antd'
-import { sdk } from '../src/client'
 import Link from 'next/link'
+
+import { sdk } from '@/src/client'
+import styles from '@/styles/Home.module.css'
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext

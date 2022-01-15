@@ -1,11 +1,11 @@
-import '../styles/globals.css'
+import '@/styles/globals.css'
 import 'antd/dist/antd.css'
-import type { AppProps } from 'next/app'
 import { Layout } from 'antd'
-import Image from 'next/image'
 import Search from 'antd/lib/input/Search'
-import 'windi.css'
 import { Content, Footer } from 'antd/lib/layout/layout'
+import type { AppProps } from 'next/app'
+import Image from 'next/image'
+import 'windi.css'
 import Link from 'next/link'
 
 const { Header } = Layout
