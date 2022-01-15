@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Link href="/">
           <a className="mr-4 text-lg">Swikit</a>
         </Link>
-        <Search placeholder="search" allowClear className="max-w-80" />
+        <Search className="max-w-80" placeholder="search" allowClear />
       </Header>
       <Content className="mt-[64px] flex-grow">
         <Component {...pageProps} />
@@ -25,12 +25,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Footer className="text-center">
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
           rel="noopener noreferrer"
+          target="_blank"
         >
           Powered by{' '}
           <span>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            <Image alt="Vercel Logo" height={16} src="/vercel.svg" width={72} />
           </span>
         </a>
       </Footer>

@@ -26,3 +26,8 @@ rules:
         - pattern: "@alias/**"
           group: parent
           position: before
+  react/jsx-sort-props:
+    - 1
+    - shorthandLast: true
+      ignoreCase: true
+      reservedFirst: true
