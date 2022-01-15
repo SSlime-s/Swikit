@@ -5,7 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint; prettier '**/*.{js,jsx,ts,tsx}' --check --ignore-path .gitignore --write",
+    "lint": "next lint --fix; prettier '**/*.{js,jsx,ts,tsx}' --check --ignore-path .gitignore --write",
     "gql": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
@@ -27,6 +27,8 @@
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.7",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.4",
     "prettier": "^2.5.1",
     "typescript": "4.5.4",
     "windicss-webpack-plugin": "^1.6.2"
