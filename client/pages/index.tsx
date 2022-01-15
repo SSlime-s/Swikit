@@ -6,17 +6,19 @@ import { Button, Card } from 'antd'
 import { sdk } from '../src/client'
 import Link from 'next/link'
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   const data = await sdk.getPageByTitle({ title: 'Home' })
   const page = data.pageByTitle
 
   return {
     props: {
-      page
-    }
+      page,
+    },
   }
 }
-type Props = Awaited<ReturnType<typeof getServerSideProps>>["props"]
+type Props = Awaited<ReturnType<typeof getServerSideProps>>['props']
 
 const Home: NextPage<Props> = ({ page }) => {
   return (
@@ -25,8 +27,11 @@ const Home: NextPage<Props> = ({ page }) => {
         <title>Swikit</title>
       </Head>
 
-      <Card title={page?.title ?? "undefined"}>
-        <article className='markdown-body' dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? ""}} />
+      <Card title={page?.title ?? 'undefined'}>
+        <article
+          className="markdown-body"
+          dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? '' }}
+        />
       </Card>
 
       <Link href="/pages/The Test Page" passHref>

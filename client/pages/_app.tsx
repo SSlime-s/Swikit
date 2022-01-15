@@ -10,20 +10,19 @@ import Link from 'next/link'
 
 const { Header } = Layout
 
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout className='min-h-screen'>
-      <Header className='bg-white flex items-center fixed z-50 w-full'>
+    <Layout className="min-h-screen">
+      <Header className="bg-white flex items-center fixed z-50 w-full">
         <Link href="/">
-          <a className='mr-4 text-lg'>Swikit</a>
+          <a className="mr-4 text-lg">Swikit</a>
         </Link>
-        <Search placeholder='search' allowClear className='max-w-80' />
+        <Search placeholder="search" allowClear className="max-w-80" />
       </Header>
-      <Content className='mt-[64px] flex-grow'>
+      <Content className="mt-[64px] flex-grow">
         <Component {...pageProps} />
       </Content>
-      <Footer className='text-center'>
+      <Footer className="text-center">
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
