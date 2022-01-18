@@ -23,12 +23,12 @@ type Props = Awaited<ReturnType<typeof getServerSideProps>>['props']
 
 const Home: NextPage<Props> = ({ page }) => {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Swikit</title>
       </Head>
 
-      <Card title={page?.title ?? 'undefined'}>
+      <Card className="max-w-screen-lg m-auto" title={page?.title ?? 'undefined'}>
         <article
           className="markdown-body"
           dangerouslySetInnerHTML={{ __html: page?.bodyHtml ?? '' }}

@@ -19,9 +19,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Link>
         <Search className="max-w-80" placeholder="search" allowClear />
       </Header>
+
       <Content className="mt-[64px] flex-grow">
         <Component {...pageProps} />
       </Content>
+
       <Footer className="text-center">
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
