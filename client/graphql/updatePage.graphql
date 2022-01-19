@@ -1,0 +1,8 @@
+mutation updatePage($id: Int!, $title: String, $source: String) {
+  updatePage(input: {id: $id, title: $title, source: $source}) {
+    id
+    title
+    bodyHtml
+    source
+  }
+}
