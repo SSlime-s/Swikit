@@ -1,5 +1,5 @@
-mutation createPage {
-  createPage(input: {title: "The Test Page", source: "# The Test Page\nblank page"}) {
+mutation createPage($title: String!, $source: String!) {
+  createPage(input: {title: $title, source: $source}) {
     id
   }
 }
