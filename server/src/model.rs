@@ -51,6 +51,10 @@ impl Page {
         &self.title
     }
 
+    async fn source(&self) -> &str {
+        &self.source
+    }
+
     async fn body_html(&self) -> Result<String, agql::Error> {
         let mut options = Options::empty();
         options.insert(Options::ENABLE_STRIKETHROUGH);
