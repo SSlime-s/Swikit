@@ -74,7 +74,6 @@ const Page: NextPage<Props> = ({ ...props }) => {
           />
         </Card>
       )}
-      <Button type="primary">Button</Button>
     </div>
   )
 }
@@ -114,7 +113,7 @@ const PageEditor: React.VFC<PageEditorProps> = ({
   return (
     <Card
       extra={
-        <div className="flex gap-2 ml-4">
+        <div className="ml-4 space-x-2">
           <Button
             icon={<SaveOutlined />}
             onClick={handleClickSave}
@@ -130,9 +129,9 @@ const PageEditor: React.VFC<PageEditorProps> = ({
       title={<Input defaultValue={title} onChange={onTitleChange} />}
     >
       <Input.TextArea
+        autoSize={{minRows: 20}}
         defaultValue={source}
         onChange={onSourceChange}
-        autoSize
       />
     </Card>
   )
