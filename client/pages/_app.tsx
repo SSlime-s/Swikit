@@ -13,7 +13,7 @@ const { Header } = Layout
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Layout className="min-h-screen">
-      <Header className="bg-white flex items-center fixed z-50 w-full">
+      <Header className="fixed z-50 flex w-full items-center bg-white">
         <Link href="/">
           <a className="mr-4 text-lg">Swikit</a>
         </Link>

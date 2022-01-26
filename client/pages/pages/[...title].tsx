@@ -23,6 +23,7 @@ export const getServerSideProps = async (
 }
 type Props = Awaited<ReturnType<typeof getServerSideProps>>['props']
 
+// TODO: Page がコンフリクトしてる (今のところ問題はないけどよくないよね)
 const Page: NextPage<Props> = ({ ...props }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [page, setPage] = useState(props.page)
@@ -129,7 +130,7 @@ const PageEditor: React.VFC<PageEditorProps> = ({
       title={<Input defaultValue={title} onChange={onTitleChange} />}
     >
       <Input.TextArea
-        autoSize={{minRows: 20}}
+        autoSize={{ minRows: 20 }}
         defaultValue={source}
         onChange={onSourceChange}
       />
